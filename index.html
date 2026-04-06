@@ -228,6 +228,11 @@
       border-color: rgba(23, 147, 209, 0.22);
     }
 
+    .card:focus-visible {
+      outline: 3px solid rgba(23, 147, 209, 0.55);
+      outline-offset: 3px;
+    }
+
     .card.hidden {
       display: none;
     }
@@ -419,14 +424,14 @@
           </div>
           <div class="results-meta">
             <span class="results-count" id="resultsCount">16 applications</span>
-            <span id="activeSearchLabel">Showing all application cards</span>
+            <span id="activeSearchLabel" hidden></span>
           </div>
         </div>
       </div>
     </section>
 
     <section class="grid" id="applicationsGrid" aria-live="polite">
-      <article class="card" tabindex="0" data-title="Woodworking & Cabinetry" data-category="wood" data-keywords="woodworking cabinetry cabinet millwork joinery mdf plywood hardwood softwood panel shop furniture trim edge banding assembly wood glue made in canada">
+      <a class="card" href="https://ceccorp.ca/" data-title="Woodworking & Cabinetry" data-category="wood" data-keywords="woodworking cabinetry cabinet millwork joinery mdf plywood hardwood softwood panel shop furniture trim edge banding assembly wood glue made in canada">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -438,9 +443,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Automotive & Collision" data-category="automotive" data-keywords="automotive collision auto body trim bumper panel repair interior exterior body shop aftermarket parts plastic metal composite assembly repair shop">
+      <a class="card" href="https://ceccorp.ca/" data-title="Automotive & Collision" data-category="automotive" data-keywords="automotive collision auto body trim bumper panel repair interior exterior body shop aftermarket parts plastic metal composite assembly repair shop">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -452,9 +457,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Composite Bonding (SMC-BMC)" data-category="composites" data-keywords="composite bonding smc bmc fiberglass reinforced panels molded compound parts structural bonding industrial composite repair">
+      <a class="card" href="https://ceccorp.ca/" data-title="Composite Bonding (SMC-BMC)" data-category="composites" data-keywords="composite bonding smc bmc fiberglass reinforced panels molded compound parts structural bonding industrial composite repair">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -466,9 +471,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Metal Bonding & Fabrication" data-category="metal" data-keywords="metal bonding fabrication steel aluminum stainless brackets panels fixtures industrial manufacturing assembly rivet replacement adhesive substitute">
+      <a class="card" href="https://ceccorp.ca/" data-title="Metal Bonding & Fabrication" data-category="metal" data-keywords="metal bonding fabrication steel aluminum stainless brackets panels fixtures industrial manufacturing assembly rivet replacement adhesive substitute">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -480,9 +485,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Marine & Fiberglass Repair" data-category="marine" data-keywords="marine fiberglass repair boat hull deck transom gelcoat marine repair watercraft composite restoration docks panels">
+      <a class="card" href="https://ceccorp.ca/" data-title="Marine & Fiberglass Repair" data-category="marine" data-keywords="marine fiberglass repair boat hull deck transom gelcoat marine repair watercraft composite restoration docks panels">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -494,9 +499,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Flooring, Trim & Surface Repair" data-category="repair" data-keywords="flooring trim surface repair laminate hardwood vinyl baseboard stair nosing finish carpentry patching filling bond repair onsite">
+      <a class="card" href="https://ceccorp.ca/" data-title="Flooring, Trim & Surface Repair" data-category="repair" data-keywords="flooring trim surface repair laminate hardwood vinyl baseboard stair nosing finish carpentry patching filling bond repair onsite">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -508,9 +513,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Hobby, Models & Creative Builds" data-category="creative" data-keywords="hobby models creative builds rc plane miniature makers prototyping craft custom projects model shop detail work">
+      <a class="card" href="https://ceccorp.ca/" data-title="Hobby, Models & Creative Builds" data-category="creative" data-keywords="hobby models creative builds rc plane miniature makers prototyping craft custom projects model shop detail work">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -522,9 +527,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Potting & Encapsulation" data-category="electronics" data-keywords="potting encapsulation electronics pcb components environmental sealing vibration protection electrical resin casting insulation">
+      <a class="card" href="https://ceccorp.ca/" data-title="Potting & Encapsulation" data-category="electronics" data-keywords="potting encapsulation electronics pcb components environmental sealing vibration protection electrical resin casting insulation">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -536,9 +541,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Woodturning" data-category="wood" data-keywords="woodturning lathe blanks turning pen blanks bowl turning segmented turning finishing repair wood shop artisan makers">
+      <a class="card" href="https://ceccorp.ca/" data-title="Woodturning" data-category="wood" data-keywords="woodturning lathe blanks turning pen blanks bowl turning segmented turning finishing repair wood shop artisan makers">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -550,9 +555,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Sign Making" data-category="fabrication" data-keywords="sign making letters channel letters foam pvc acrylic dibond aluminum signage display graphics fabrication bonding shop">
+      <a class="card" href="https://ceccorp.ca/" data-title="Sign Making" data-category="fabrication" data-keywords="sign making letters channel letters foam pvc acrylic dibond aluminum signage display graphics fabrication bonding shop">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -564,9 +569,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Countertop & Stone" data-category="stone" data-keywords="countertop stone granite quartz marble solid surface edge lamination seam repair monument fabrication stone shop">
+      <a class="card" href="https://ceccorp.ca/" data-title="Countertop & Stone" data-category="stone" data-keywords="countertop stone granite quartz marble solid surface edge lamination seam repair monument fabrication stone shop">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -578,9 +583,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Golf Club Repair" data-category="repair" data-keywords="golf club repair club making shafts heads ferrules grips hosel bonding sports equipment workshop golf shop">
+      <a class="card" href="https://ceccorp.ca/" data-title="Golf Club Repair" data-category="repair" data-keywords="golf club repair club making shafts heads ferrules grips hosel bonding sports equipment workshop golf shop">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -592,9 +597,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Polyolefins Bonding (PE, PP)" data-category="plastics" data-keywords="polyolefins bonding pe pp polyethylene polypropylene low surface energy plastics plastic bonding industrial parts packaging">
+      <a class="card" href="https://ceccorp.ca/" data-title="Polyolefins Bonding (PE, PP)" data-category="plastics" data-keywords="polyolefins bonding pe pp polyethylene polypropylene low surface energy plastics plastic bonding industrial parts packaging">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -606,9 +611,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Fiberglass & Carbon Fiber Bonding" data-category="composites" data-keywords="fiberglass carbon fiber bonding composite laminates panels lightweight structures motorsport marine aerospace sporting goods">
+      <a class="card" href="https://ceccorp.ca/" data-title="Fiberglass & Carbon Fiber Bonding" data-category="composites" data-keywords="fiberglass carbon fiber bonding composite laminates panels lightweight structures motorsport marine aerospace sporting goods">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -620,9 +625,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Fossil Preparation" data-category="specialty" data-keywords="fossil preparation paleontology specimen stabilization repair matrix bone shell ammonite museum lab prep delicate bonding">
+      <a class="card" href="https://ceccorp.ca/" data-title="Fossil Preparation" data-category="specialty" data-keywords="fossil preparation paleontology specimen stabilization repair matrix bone shell ammonite museum lab prep delicate bonding">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -634,9 +639,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
 
-      <article class="card" tabindex="0" data-title="Welding Substitute" data-category="metal" data-keywords="welding substitute no weld weld replacement metal repair brackets fixtures assemblies cold bonding heat sensitive materials fabrication">
+      <a class="card" href="https://ceccorp.ca/" data-title="Welding Substitute" data-category="metal" data-keywords="welding substitute no weld weld replacement metal repair brackets fixtures assemblies cold bonding heat sensitive materials fabrication">
         <div class="card-media">
           <div class="card-overlay"></div>
           <div class="card-content">
@@ -648,7 +653,7 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
     </section>
 
     <div class="empty-state" id="emptyState">
@@ -740,15 +745,16 @@
     function updateResultsMeta(visibleCount, query, chipLabel) {
       resultsCount.textContent = `${visibleCount} application${visibleCount === 1 ? '' : 's'}`;
 
+      let detail = '';
       if (query && chipLabel) {
-        activeSearchLabel.textContent = `Filtered by “${query}” and quick filter “${chipLabel}”`;
+        detail = `Filtered by “${query}” and quick filter “${chipLabel}”`;
       } else if (query) {
-        activeSearchLabel.textContent = `Showing results for “${query}”`;
+        detail = `Showing results for “${query}”`;
       } else if (chipLabel) {
-        activeSearchLabel.textContent = `Filtered by quick filter “${chipLabel}”`;
-      } else {
-        activeSearchLabel.textContent = 'Showing all application cards';
+        detail = `Filtered by quick filter “${chipLabel}”`;
       }
+      activeSearchLabel.textContent = detail;
+      activeSearchLabel.hidden = !detail;
     }
 
     function applySearch() {
