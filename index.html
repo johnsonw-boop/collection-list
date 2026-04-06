@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications Landing Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #1793D1;
+      --secondary: #241f21;
+      --bg: #f4f7fa;
+      --surface: #ffffff;
+      --surface-2: #eaf4fa;
+      --text: #241f21;
+      --muted: #5f6771;
+      --border: rgba(36, 31, 33, 0.09);
+      --shadow: 0 12px 0 rgba(36, 31, 33, 0.12);
+      --shadow-hover: 0 16px 0 rgba(36, 31, 33, 0.16);
+      --radius: 16px;
+      --thumb-ratio: 1.21 / 1;
+      --max-width: 1440px;
+      --page-inline-gutter: clamp(24px, 5.5vw, 88px);
+      --card-media-image: url('https://i0.wp.com/wpu.ac.pg/wp-content/uploads/2024/01/placeholder-2.png?fit=1200%2C800&ssl=1');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Futura, 'Futura PT', 'Trebuchet MS', 'Fira Sans', Arial, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(23, 147, 209, 0.05), transparent 36%),
+        linear-gradient(315deg, rgba(36, 31, 33, 0.03), transparent 44%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .applications-page {
+      width: min(calc(100% - 2 * var(--page-inline-gutter)), var(--max-width));
+      margin: 28px auto 48px;
+    }
+
+    .search-shell {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 8px 0 18px;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(244, 247, 250, 0.92), rgba(244, 247, 250, 0.74), rgba(244, 247, 250, 0));
+    }
+
+    .search-panel {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .search-bar {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      opacity: 0.68;
+      pointer-events: none;
+    }
+
+    #applicationSearch {
+      width: 100%;
+      height: 58px;
+      padding: 0 18px 0 52px;
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      background: var(--surface-2);
+      color: var(--text);
+      font-family: 'Fira Sans', Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    #applicationSearch:focus {
+      border-color: rgba(23, 147, 209, 0.55);
+      box-shadow: 0 0 0 4px rgba(23, 147, 209, 0.14);
+      background: #fff;
+    }
+
+    .button,
+    .chip {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      font-family: 'Fira Sans', Arial, sans-serif;
+    }
+
+    .button {
+      height: 58px;
+      padding: 0 18px;
+      border-radius: 16px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    .chip:hover,
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 0 rgba(16, 93, 132, 0.18);
+    }
+
+    .button-secondary {
+      background: var(--secondary);
+      color: #fff;
+      box-shadow: 0 8px 0 rgba(36, 31, 33, 0.16);
+    }
+
+    .button:active,
+    .chip:active,
+    .card:active {
+      transform: translateY(0);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px 16px;
+    }
+
+    .chip-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      position: relative;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--secondary);
+      border: 1px solid rgba(36, 31, 33, 0.1);
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .chip.active {
+      background: rgba(23, 147, 209, 0.12);
+      color: #0d5e87;
+      border-color: rgba(23, 147, 209, 0.28);
+    }
+
+    .results-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: 'Fira Sans', Arial, sans-serif;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .results-count {
+      color: var(--secondary);
+      font-weight: 800;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 10px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      min-height: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      isolation: isolate;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(23, 147, 209, 0.22);
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+    .card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: var(--thumb-ratio);
+      overflow: hidden;
+      background-color: #e8edf2;
+      background-image:
+        linear-gradient(rgba(36, 31, 33, 0.22), rgba(36, 31, 33, 0.22)),
+        var(--card-media-image);
+      background-size: cover, cover;
+      background-position: center, center;
+      background-repeat: no-repeat, no-repeat;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(36, 31, 33, 0.84) 0%, rgba(36, 31, 33, 0.46) 40%, rgba(36, 31, 33, 0.12) 70%, transparent 100%);
+      z-index: 1;
+    }
+
+    .card-content {
+      position: absolute;
+      inset: auto 0 0 0;
+      z-index: 2;
+      padding: 18px 18px 20px;
+    }
+
+    .card-content::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      bottom: 100%;
+      width: 68px;
+      height: 6px;
+      background: var(--primary);
+      transform: skew(-28deg);
+      border-radius: 2px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: clamp(1rem, 1.2vw, 1.45rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.88);
+      font-family: 'Fira Sans', Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      display: none;
+      margin-top: 22px;
+      padding: 36px 24px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-family: 'Fira Sans', Arial, sans-serif;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1180px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .applications-page {
+        margin-top: 18px;
+      }
+
+      .search-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .toolbar {
+        align-items: flex-start;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card h3 {
+        font-size: 1.08rem;
+      }
+
+      .tag-row {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="applications-page">
+    <section class="search-shell">
+      <div class="search-panel">
+        <div class="search-bar">
+          <label class="input-wrap" for="applicationSearch">
+            <span class="sr-only">Search applications</span>
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input
+              id="applicationSearch"
+              type="search"
+              autocomplete="off"
+              placeholder="Search by application, material, or use case"
+            />
+          </label>
+          <button class="button button-primary" id="searchButton" type="button">Search</button>
+          <button class="button button-secondary" id="clearButton" type="button">Clear</button>
+        </div>
+
+        <div class="toolbar">
+          <div class="chip-group" id="quickFilters" aria-label="Quick filters">
+            <button class="chip" type="button" data-filter="wood">Wood</button>
+            <button class="chip" type="button" data-filter="automotive">Automotive</button>
+            <button class="chip" type="button" data-filter="composites">Composites</button>
+            <button class="chip" type="button" data-filter="stone">Stone</button>
+            <button class="chip" type="button" data-filter="marine">Marine</button>
+            <button class="chip" type="button" data-filter="repair">Repair</button>
+          </div>
+          <div class="results-meta">
+            <span class="results-count" id="resultsCount">16 applications</span>
+            <span id="activeSearchLabel">Showing all application cards</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="applicationsGrid" aria-live="polite">
+      <article class="card" tabindex="0" data-title="Woodworking & Cabinetry" data-category="wood" data-keywords="woodworking cabinetry cabinet millwork joinery mdf plywood hardwood softwood panel shop furniture trim edge banding assembly wood glue made in canada">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Woodworking &amp; Cabinetry</h3>
+            <div class="tag-row">
+              <span class="tag">Wood</span>
+              <span class="tag">Cabinet shop</span>
+              <span class="tag">Assembly</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Automotive & Collision" data-category="automotive" data-keywords="automotive collision auto body trim bumper panel repair interior exterior body shop aftermarket parts plastic metal composite assembly repair shop">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Automotive &amp; Collision</h3>
+            <div class="tag-row">
+              <span class="tag">Auto body</span>
+              <span class="tag">Trim</span>
+              <span class="tag">Repair</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Composite Bonding (SMC-BMC)" data-category="composites" data-keywords="composite bonding smc bmc fiberglass reinforced panels molded compound parts structural bonding industrial composite repair">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Composite Bonding (SMC-BMC)</h3>
+            <div class="tag-row">
+              <span class="tag">SMC</span>
+              <span class="tag">BMC</span>
+              <span class="tag">Composite</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Metal Bonding & Fabrication" data-category="metal" data-keywords="metal bonding fabrication steel aluminum stainless brackets panels fixtures industrial manufacturing assembly rivet replacement adhesive substitute">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Metal Bonding &amp; Fabrication</h3>
+            <div class="tag-row">
+              <span class="tag">Metal</span>
+              <span class="tag">Fabrication</span>
+              <span class="tag">Assembly</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Marine & Fiberglass Repair" data-category="marine" data-keywords="marine fiberglass repair boat hull deck transom gelcoat marine repair watercraft composite restoration docks panels">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Marine &amp; Fiberglass Repair</h3>
+            <div class="tag-row">
+              <span class="tag">Marine</span>
+              <span class="tag">Fiberglass</span>
+              <span class="tag">Boat repair</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Flooring, Trim & Surface Repair" data-category="repair" data-keywords="flooring trim surface repair laminate hardwood vinyl baseboard stair nosing finish carpentry patching filling bond repair onsite">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Flooring, Trim &amp; Surface Repair</h3>
+            <div class="tag-row">
+              <span class="tag">Flooring</span>
+              <span class="tag">Trim</span>
+              <span class="tag">Surface repair</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Hobby, Models & Creative Builds" data-category="creative" data-keywords="hobby models creative builds rc plane miniature makers prototyping craft custom projects model shop detail work">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Hobby, Models &amp; Creative Builds</h3>
+            <div class="tag-row">
+              <span class="tag">Hobby</span>
+              <span class="tag">Models</span>
+              <span class="tag">Creative</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Potting & Encapsulation" data-category="electronics" data-keywords="potting encapsulation electronics pcb components environmental sealing vibration protection electrical resin casting insulation">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Potting &amp; Encapsulation</h3>
+            <div class="tag-row">
+              <span class="tag">Electronics</span>
+              <span class="tag">Protection</span>
+              <span class="tag">Encapsulation</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Woodturning" data-category="wood" data-keywords="woodturning lathe blanks turning pen blanks bowl turning segmented turning finishing repair wood shop artisan makers">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Woodturning</h3>
+            <div class="tag-row">
+              <span class="tag">Lathe work</span>
+              <span class="tag">Turning</span>
+              <span class="tag">Wood</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Sign Making" data-category="fabrication" data-keywords="sign making letters channel letters foam pvc acrylic dibond aluminum signage display graphics fabrication bonding shop">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Sign Making</h3>
+            <div class="tag-row">
+              <span class="tag">Signs</span>
+              <span class="tag">Acrylic</span>
+              <span class="tag">PVC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Countertop & Stone" data-category="stone" data-keywords="countertop stone granite quartz marble solid surface edge lamination seam repair monument fabrication stone shop">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Countertop &amp; Stone</h3>
+            <div class="tag-row">
+              <span class="tag">Stone</span>
+              <span class="tag">Countertops</span>
+              <span class="tag">Seam repair</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Golf Club Repair" data-category="repair" data-keywords="golf club repair club making shafts heads ferrules grips hosel bonding sports equipment workshop golf shop">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Golf Club Repair</h3>
+            <div class="tag-row">
+              <span class="tag">Golf</span>
+              <span class="tag">Shafts</span>
+              <span class="tag">Repair</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Polyolefins Bonding (PE, PP)" data-category="plastics" data-keywords="polyolefins bonding pe pp polyethylene polypropylene low surface energy plastics plastic bonding industrial parts packaging">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Polyolefins Bonding (PE, PP)</h3>
+            <div class="tag-row">
+              <span class="tag">PE</span>
+              <span class="tag">PP</span>
+              <span class="tag">Plastics</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Fiberglass & Carbon Fiber Bonding" data-category="composites" data-keywords="fiberglass carbon fiber bonding composite laminates panels lightweight structures motorsport marine aerospace sporting goods">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Fiberglass &amp; Carbon Fiber Bonding</h3>
+            <div class="tag-row">
+              <span class="tag">Fiberglass</span>
+              <span class="tag">Carbon fiber</span>
+              <span class="tag">Composites</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Fossil Preparation" data-category="specialty" data-keywords="fossil preparation paleontology specimen stabilization repair matrix bone shell ammonite museum lab prep delicate bonding">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Fossil Preparation</h3>
+            <div class="tag-row">
+              <span class="tag">Specimens</span>
+              <span class="tag">Delicate repair</span>
+              <span class="tag">Prep lab</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0" data-title="Welding Substitute" data-category="metal" data-keywords="welding substitute no weld weld replacement metal repair brackets fixtures assemblies cold bonding heat sensitive materials fabrication">
+        <div class="card-media">
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3>Welding Substitute</h3>
+            <div class="tag-row">
+              <span class="tag">No-weld</span>
+              <span class="tag">Metal repair</span>
+              <span class="tag">Fabrication</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="empty-state" id="emptyState">
+      <strong>No applications match that search.</strong>
+      <p>Try a broader material, process, or industry term such as wood, fiberglass, repair, PE, PP, or automotive.</p>
+    </div>
+  </main>
+
+  <script>
+    const searchInput = document.getElementById('applicationSearch');
+    const searchButton = document.getElementById('searchButton');
+    const clearButton = document.getElementById('clearButton');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const resultsCount = document.getElementById('resultsCount');
+    const activeSearchLabel = document.getElementById('activeSearchLabel');
+    const emptyState = document.getElementById('emptyState');
+
+    const synonymMap = {
+      wood: ['woodworking', 'cabinetry', 'woodturning', 'trim', 'millwork', 'joinery'],
+      automotive: ['auto', 'collision', 'body shop', 'bumper', 'vehicle'],
+      composites: ['composite', 'fiberglass', 'carbon fiber', 'smc', 'bmc'],
+      stone: ['countertop', 'granite', 'quartz', 'marble', 'solid surface'],
+      marine: ['boat', 'hull', 'deck', 'fiberglass repair'],
+      repair: ['repair', 'restoration', 'rebuild', 'fix', 'maintenance'],
+      plastics: ['pe', 'pp', 'polyethylene', 'polypropylene', 'polyolefins'],
+      metal: ['fabrication', 'welding', 'steel', 'aluminum', 'stainless']
+    };
+
+    function normalize(value) {
+      return value
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/&/g, ' and ')
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function tokenize(value) {
+      return normalize(value)
+        .split(' ')
+        .filter(Boolean);
+    }
+
+    function expandTerms(tokens) {
+      const expanded = new Set(tokens);
+
+      tokens.forEach(token => {
+        if (synonymMap[token]) {
+          synonymMap[token].forEach(term => expanded.add(normalize(term)));
+        }
+
+        Object.entries(synonymMap).forEach(([key, values]) => {
+          if (values.includes(token)) {
+            expanded.add(key);
+          }
+        });
+      });
+
+      return Array.from(expanded);
+    }
+
+    function scoreCard(card, terms) {
+      const title = normalize(card.dataset.title || '');
+      const category = normalize(card.dataset.category || '');
+      const keywords = normalize(card.dataset.keywords || '');
+      const haystack = `${title} ${category} ${keywords}`;
+
+      let score = 0;
+
+      for (const term of terms) {
+        if (!term) continue;
+
+        if (title.includes(term)) score += 5;
+        if (category.includes(term)) score += 3;
+        if (keywords.includes(term)) score += 2;
+
+        const partialTerms = term.split(' ').filter(Boolean);
+        partialTerms.forEach(part => {
+          if (haystack.includes(part)) score += 1;
+        });
+      }
+
+      return score;
+    }
+
+    function updateResultsMeta(visibleCount, query, chipLabel) {
+      resultsCount.textContent = `${visibleCount} application${visibleCount === 1 ? '' : 's'}`;
+
+      if (query && chipLabel) {
+        activeSearchLabel.textContent = `Filtered by “${query}” and quick filter “${chipLabel}”`;
+      } else if (query) {
+        activeSearchLabel.textContent = `Showing results for “${query}”`;
+      } else if (chipLabel) {
+        activeSearchLabel.textContent = `Filtered by quick filter “${chipLabel}”`;
+      } else {
+        activeSearchLabel.textContent = 'Showing all application cards';
+      }
+    }
+
+    function applySearch() {
+      const rawQuery = searchInput.value.trim();
+      const queryTokens = tokenize(rawQuery);
+      const searchTerms = expandTerms(queryTokens);
+      const activeChip = document.querySelector('.chip.active');
+      const chipFilter = activeChip ? normalize(activeChip.dataset.filter) : '';
+      const chipLabel = activeChip ? activeChip.textContent.trim() : '';
+
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cardCategory = normalize(card.dataset.category || '');
+        const cardKeywords = normalize(card.dataset.keywords || '');
+        const chipMatch = !chipFilter || cardCategory.includes(chipFilter) || cardKeywords.includes(chipFilter);
+
+        let matches = chipMatch;
+
+        if (matches && searchTerms.length > 0) {
+          const score = scoreCard(card, searchTerms);
+          matches = score > 0;
+        }
+
+        card.classList.toggle('hidden', !matches);
+
+        if (matches) {
+          visibleCount += 1;
+        }
+      });
+
+      emptyState.classList.toggle('visible', visibleCount === 0);
+      updateResultsMeta(visibleCount, rawQuery, chipLabel);
+    }
+
+    function clearSearch() {
+      searchInput.value = '';
+      chips.forEach(chip => chip.classList.remove('active'));
+      applySearch();
+      searchInput.focus();
+    }
+
+    searchInput.addEventListener('input', applySearch);
+    searchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        applySearch();
+      }
+      if (event.key === 'Escape') {
+        clearSearch();
+      }
+    });
+
+    searchButton.addEventListener('click', applySearch);
+    clearButton.addEventListener('click', clearSearch);
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const isActive = chip.classList.contains('active');
+        chips.forEach(item => item.classList.remove('active'));
+        if (!isActive) chip.classList.add('active');
+        applySearch();
+      });
+    });
+
+    applySearch();
+  </script>
+</body>
+</html>
