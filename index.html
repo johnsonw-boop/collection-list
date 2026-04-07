@@ -15,9 +15,9 @@
       --surface-2: #eaf4fa;
       --text: #241f21;
       --muted: #5f6771;
-      --border: rgba(36, 31, 33, 0.09);
-      --shadow: 0 12px 0 rgba(36, 31, 33, 0.12);
-      --shadow-hover: 0 16px 0 rgba(36, 31, 33, 0.16);
+      --border: rgba(36, 31, 33, 0.08);
+      --shadow: 0 2px 12px rgba(36, 31, 33, 0.06), 0 8px 28px rgba(36, 31, 33, 0.05);
+      --shadow-hover: 0 4px 16px rgba(36, 31, 33, 0.08), 0 12px 32px rgba(23, 147, 209, 0.08);
       --radius: 16px;
       --thumb-ratio: 1.21 / 1;
       --max-width: 1440px;
@@ -36,29 +36,27 @@
     body {
       margin: 0;
       font-family: Futura, 'Futura PT', 'Trebuchet MS', 'Fira Sans', Arial, sans-serif;
-      background:
-        linear-gradient(135deg, rgba(23, 147, 209, 0.05), transparent 36%),
-        linear-gradient(315deg, rgba(36, 31, 33, 0.03), transparent 44%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
     }
 
     .applications-page {
       width: min(calc(100% - 2 * var(--page-inline-gutter)), var(--max-width));
-      margin: 28px auto 48px;
+      margin: 36px auto 56px;
     }
 
     .search-shell {
       position: sticky;
       top: 0;
       z-index: 20;
-      padding: 8px 0 18px;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(244, 247, 250, 0.92), rgba(244, 247, 250, 0.74), rgba(244, 247, 250, 0));
+      padding: 0;
+      margin-bottom: 32px;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(244, 247, 250, 0.97) 0%, rgba(244, 247, 250, 0.85) 70%, rgba(244, 247, 250, 0));
     }
 
     .search-panel {
-      background: rgba(255, 255, 255, 0.94);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -68,9 +66,9 @@
     .search-bar {
       display: grid;
       grid-template-columns: 1fr auto auto;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
-      padding: 16px;
+      padding: 18px 20px;
     }
 
     .input-wrap {
@@ -80,7 +78,7 @@
     .search-icon {
       position: absolute;
       top: 50%;
-      left: 18px;
+      left: 16px;
       transform: translateY(-50%);
       width: 18px;
       height: 18px;
@@ -90,8 +88,8 @@
 
     #applicationSearch {
       width: 100%;
-      height: 58px;
-      padding: 0 18px 0 52px;
+      height: 50px;
+      padding: 0 16px 0 48px;
       border: 2px solid transparent;
       border-radius: var(--radius);
       background: var(--surface-2);
@@ -118,9 +116,9 @@
     }
 
     .button {
-      height: 58px;
-      padding: 0 18px;
-      border-radius: 16px;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 14px;
       font-size: 0.96rem;
       font-weight: 700;
       letter-spacing: 0.02em;
@@ -136,13 +134,13 @@
     .button-primary {
       background: var(--primary);
       color: #fff;
-      box-shadow: 0 8px 0 rgba(16, 93, 132, 0.18);
+      box-shadow: 0 1px 2px rgba(16, 93, 132, 0.2);
     }
 
     .button-secondary {
       background: var(--secondary);
       color: #fff;
-      box-shadow: 0 8px 0 rgba(36, 31, 33, 0.16);
+      box-shadow: 0 1px 2px rgba(36, 31, 33, 0.12);
     }
 
     .button:active,
@@ -153,59 +151,62 @@
 
     .toolbar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 16px 16px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0 20px 18px;
+      border-top: 1px solid rgba(36, 31, 33, 0.06);
     }
 
     .chip-group {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
+      padding: 14px 0 12px;
     }
 
     .chip {
       position: relative;
-      min-height: 42px;
-      padding: 10px 16px;
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--secondary);
-      border: 1px solid rgba(36, 31, 33, 0.1);
-      font-size: 0.92rem;
-      font-weight: 700;
+      min-height: 36px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      border: 1px solid transparent;
+      font-size: 0.875rem;
+      font-weight: 600;
       transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
     }
 
     .chip.active {
-      background: rgba(23, 147, 209, 0.12);
+      background: rgba(23, 147, 209, 0.14);
       color: #0d5e87;
-      border-color: rgba(23, 147, 209, 0.28);
+      border-color: rgba(23, 147, 209, 0.35);
     }
 
     .results-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid rgba(36, 31, 33, 0.06);
       font-family: 'Fira Sans', Arial, sans-serif;
       color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 0.875rem;
+      font-weight: 500;
     }
 
     .results-count {
       color: var(--secondary);
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 22px;
-      margin-top: 10px;
+      gap: 28px;
+      margin-top: 4px;
     }
 
     .card {
@@ -245,7 +246,7 @@
       background-color: #e8edf2;
       background-image:
         linear-gradient(rgba(36, 31, 33, 0.22), rgba(36, 31, 33, 0.22)),
-        var(--card-media-image);
+        var(--thumb-image, var(--card-media-image));
       background-size: cover, cover;
       background-position: center, center;
       background-repeat: no-repeat, no-repeat;
@@ -254,7 +255,7 @@
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(36, 31, 33, 0.84) 0%, rgba(36, 31, 33, 0.46) 40%, rgba(36, 31, 33, 0.12) 70%, transparent 100%);
+      background: linear-gradient(to top, rgba(36, 31, 33, 0.78) 0%, rgba(36, 31, 33, 0.35) 45%, rgba(36, 31, 33, 0.08) 72%, transparent 100%);
       z-index: 1;
     }
 
@@ -262,23 +263,11 @@
       position: absolute;
       inset: auto 0 0 0;
       z-index: 2;
-      padding: 18px 18px 20px;
-    }
-
-    .card-content::before {
-      content: '';
-      position: absolute;
-      left: 18px;
-      bottom: 100%;
-      width: 68px;
-      height: 6px;
-      background: var(--primary);
-      transform: skew(-28deg);
-      border-radius: 2px;
+      padding: 16px 16px 18px;
     }
 
     .card h3 {
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       color: #fff;
       font-size: clamp(1rem, 1.2vw, 1.45rem);
       line-height: 1.18;
@@ -289,28 +278,28 @@
     .tag-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
-      min-height: 28px;
-      padding: 5px 10px;
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: rgba(255, 255, 255, 0.88);
+      min-height: 24px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 0;
+      color: rgba(255, 255, 255, 0.82);
       font-family: 'Fira Sans', Arial, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 500;
       white-space: nowrap;
     }
 
     .empty-state {
       display: none;
-      margin-top: 22px;
-      padding: 36px 24px;
+      margin-top: 28px;
+      padding: 32px 28px;
       border-radius: var(--radius);
       background: #fff;
       border: 1px solid var(--border);
@@ -360,6 +349,7 @@
 
       .search-bar {
         grid-template-columns: 1fr;
+        padding: 16px;
       }
 
       .button {
@@ -367,12 +357,12 @@
       }
 
       .toolbar {
-        align-items: flex-start;
+        padding: 0 16px 16px;
       }
 
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
+        gap: 20px;
       }
     }
 
@@ -432,7 +422,7 @@
 
     <section class="grid" id="applicationsGrid" aria-live="polite">
       <a class="card" href="https://ceccorp.ca/" data-title="Woodworking & Cabinetry" data-category="wood" data-keywords="woodworking cabinetry cabinet millwork joinery mdf plywood hardwood softwood panel shop furniture trim edge banding assembly wood glue made in canada">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/1_aee01a3d-4b1f-4a0d-b05f-74b841ea011f.png?v=1774557019')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Woodworking &amp; Cabinetry</h3>
@@ -446,7 +436,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Automotive & Collision" data-category="automotive" data-keywords="automotive collision auto body trim bumper panel repair interior exterior body shop aftermarket parts plastic metal composite assembly repair shop">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/2_27d70e50-12e2-407c-9e03-c5dc56203ffb.png?v=1774557053')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Automotive &amp; Collision</h3>
@@ -488,7 +478,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Marine & Fiberglass Repair" data-category="marine" data-keywords="marine fiberglass repair boat hull deck transom gelcoat marine repair watercraft composite restoration docks panels">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/4_0a71c87e-b0be-4086-897e-20153a0f5666.png?v=1774558482')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Marine &amp; Fiberglass Repair</h3>
@@ -502,7 +492,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Flooring, Trim & Surface Repair" data-category="repair" data-keywords="flooring trim surface repair laminate hardwood vinyl baseboard stair nosing finish carpentry patching filling bond repair onsite">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/5_65ad0142-f9c3-425a-b1b7-e2b0a291feb3.png?v=1774558499')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Flooring, Trim &amp; Surface Repair</h3>
@@ -516,7 +506,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Hobby, Models & Creative Builds" data-category="creative" data-keywords="hobby models creative builds rc plane miniature makers prototyping craft custom projects model shop detail work">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/6_1ac85b50-baf4-41bd-a0b8-018c8b28eeb7.png?v=1774558537')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Hobby, Models &amp; Creative Builds</h3>
@@ -558,7 +548,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Sign Making" data-category="fabrication" data-keywords="sign making letters channel letters foam pvc acrylic dibond aluminum signage display graphics fabrication bonding shop">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/Xnip2026-04-07_09-17-29.png?v=1775578668')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Sign Making</h3>
@@ -586,7 +576,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Golf Club Repair" data-category="repair" data-keywords="golf club repair club making shafts heads ferrules grips hosel bonding sports equipment workshop golf shop">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/Xnip2026-04-07_09-12-57.png?v=1775578394')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Golf Club Repair</h3>
@@ -628,7 +618,7 @@
       </a>
 
       <a class="card" href="https://ceccorp.ca/" data-title="Fossil Preparation" data-category="specialty" data-keywords="fossil preparation paleontology specimen stabilization repair matrix bone shell ammonite museum lab prep delicate bonding">
-        <div class="card-media">
+        <div class="card-media" style="--thumb-image: url('https://cdn.shopify.com/s/files/1/0465/6545/8072/files/Xnip2026-04-07_09-19-54.png?v=1775578807')">
           <div class="card-overlay"></div>
           <div class="card-content">
             <h3>Fossil Preparation</h3>
